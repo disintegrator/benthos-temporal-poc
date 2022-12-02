@@ -1,8 +1,6 @@
-# Temporal Go Project Template
+# Temporal + Benthos - Proof of Concept
 
-This is a simple project for demonstrating Temporal with the Go SDK.
-
-The full 20-minute tutorial is here: https://learn.temporal.io/getting_started/go/first_program_in_go/
+This project demonstrates how Benthos can be used to drive Temporal workflow execution.
 
 ## Basic instructions
 
@@ -27,13 +25,19 @@ git clone https://github.com/temporalio/money-transfer-project-template-go
 cd money-transfer-project-template-go
 ```
 
-### Step 2: Run the Workflow
+### Step 2: Run the workflow with Benthos
 
 ```bash
-go run start/main.go
+go run benthos/main.go --log.level debug -c config.generate.yml
 ```
 
 Observe that Temporal Web reflects the workflow, but it is still in "Running" status. This is because there is no Workflow or Activity Worker yet listening to the `TRANSFER_MONEY_TASK_QUEUE` task queue to process this work.
+
+There is also an alternate pipeline configuration which reads data from a file and uses lines within it to trigger executions. You can run it like so:
+
+```bash
+go run benthos/main.go --log.level debug -c config.file.yml
+```
 
 ### Step 3: Run the Worker
 
@@ -49,6 +53,4 @@ Now you can see the workflow run to completion. You can also see the worker poll
 
 ## What Next?
 
-You can run the Workflow code a few more times with `go run start/main.go` to understand how it interacts with the Worker and Temporal Server.
-
-Please [read the tutorial](https://learn.temporal.io/getting_started/go/first_program_in_go/) for more details.
+You can run the Workflow code a few more times with `go run benthos/main.go --log.level debug -c config.yml` to understand how it interacts with the Worker and Temporal Server.

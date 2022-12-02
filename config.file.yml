@@ -1,0 +1,16 @@
+input:
+  file:
+    paths:
+      - ./samples.jsonl
+    codec: lines
+
+output:
+  temporal_workflow:
+    host: localhost
+    port: 7233
+    namespace: default
+    task_queue: TRANSFER_MONEY_TASK_QUEUE
+    name: MoneyTransfer
+    id: pay-invoice-${! json("InvoiceID") }
+    args_mapping: |
+      root = this.Payload

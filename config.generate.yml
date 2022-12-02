@@ -1,0 +1,24 @@
+input:
+  generate:
+    interval: 1s
+    mapping: |
+      root = {
+        "InvoiceID": count("invoice_id").string(),
+        "Payload": {
+          "SourceAccount": "85-150",
+          "TargetAccount": "43-812",
+          "Amount":        250,
+          "ReferenceID":   "12345",
+        }
+      }
+
+output:
+  temporal_workflow:
+    host: localhost
+    port: 7233
+    namespace: default
+    task_queue: TRANSFER_MONEY_TASK_QUEUE
+    name: MoneyTransfer
+    id: pay-invoice-${! json("InvoiceID") }
+    args_mapping: |
+      root = this.Payload
