@@ -21,8 +21,8 @@ Leave it running. You can use the Temporal Web UI at [localhost:8080](localhost:
 In another terminal instance, clone this repo and run this application.
 
 ```bash
-git clone https://github.com/temporalio/money-transfer-project-template-go
-cd money-transfer-project-template-go
+git clone https://github.com/disintegrator/benthos-temporal-poc.git
+cd benthos-temporal-poc
 ```
 
 ### Step 2: Run the workflow with Benthos
